@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import aptosClient from "@aptos-labs/aptos-client";
-import { AptosSettings, ClientConfig, Client, FullNodeConfig, IndexerConfig, FaucetConfig } from "../types";
+import { AptosSettings, ClientConfig, Client, FullNodeConfig, IndexerConfig, FaucetConfig, scriptComposerConfig } from "../types";
 import {
   NetworkToNodeAPI,
   NetworkToFaucetAPI,
@@ -101,6 +101,8 @@ export class AptosConfig {
    */
   readonly faucetConfig?: FaucetConfig;
 
+  readonly scriptComposerConfig?: scriptComposerConfig;
+
   /**
    * Initializes an instance of the Aptos client with the specified settings.
    * This allows users to configure various aspects of the client, such as network and endpoints.
@@ -145,8 +147,8 @@ export class AptosConfig {
     this.fullnodeConfig = settings?.fullnodeConfig ?? {};
     this.indexerConfig = settings?.indexerConfig ?? {};
     this.faucetConfig = settings?.faucetConfig ?? {};
+    this.scriptComposerConfig = settings?.scriptComposerConfig ?? {};
   }
-
   /**
    * Returns the URL endpoint to send the request to based on the specified API type.
    * If a custom URL was provided in the configuration, that URL is returned. Otherwise, the URL endpoint is derived from the network.

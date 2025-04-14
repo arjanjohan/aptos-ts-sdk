@@ -1,6 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
+import { InitOutput, SyncInitInput, TransactionComposer } from "@aptos-labs/script-composer-pack";
 import { Network } from "../utils/apiEndpoints";
 import { OrderBy, TokenStandard } from "./indexer";
 
@@ -225,6 +226,8 @@ export type AptosSettings = {
   readonly indexerConfig?: IndexerConfig;
 
   readonly faucetConfig?: FaucetConfig;
+
+  readonly scriptComposerConfig?: scriptComposerConfig;
 };
 
 /**
@@ -275,6 +278,13 @@ export type ClientConfig = ClientHeadersType & {
   WITH_CREDENTIALS?: boolean;
   API_KEY?: string;
 };
+
+export type scriptComposerConfig = {
+  initSync?: (module: {
+    module: SyncInitInput;
+  } | SyncInitInput) => InitOutput ;
+  transactionComposer?: new () => TransactionComposer;
+}
 
 /**
  * A configuration object for a Fullnode, allowing for the inclusion of extra headers in requests.

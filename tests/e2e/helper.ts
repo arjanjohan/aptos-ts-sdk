@@ -1,4 +1,5 @@
 import { Aptos, AptosConfig, Network, NetworkToNetworkName } from "../../src";
+import { initSync, TransactionComposer } from "@aptos-labs/script-composer-pack";
 
 /**
  * Use this function whenever you want an Aptos client.
@@ -25,6 +26,10 @@ export function getAptosClient(additionalConfig?: Partial<AptosConfig>): { aptos
     fullnode: process.env.APTOS_NODE_API_URL,
     indexer: process.env.APTOS_INDEXER_API_URL,
     faucet: process.env.APTOS_FAUCET_API_URL,
+    scriptComposerConfig: {
+      initSync,
+      transactionComposer: TransactionComposer,
+    },
     ...additionalConfig,
   });
   const aptos = new Aptos(config);
