@@ -172,10 +172,13 @@ export class Build {
       throw new Error("Script composer is not initialized");
     }
     if (!this.config.scriptComposerConfig?.initSync) {
-      throw new Error("Script composer is not initialized"); 
+      throw new Error("Script composer is not initialized");
     }
     // Initialize the script composer with the provided transaction composer and initSync function.
-    await composer.init(this.config.scriptComposerConfig?.transactionComposer, this.config.scriptComposerConfig?.initSync);
+    await composer.init(
+      this.config.scriptComposerConfig?.transactionComposer,
+      this.config.scriptComposerConfig?.initSync,
+    );
     const builder = await args.builder(composer);
     const bytes = builder.build();
     const rawTxn = await generateRawTransaction({

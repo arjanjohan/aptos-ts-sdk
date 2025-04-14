@@ -29,11 +29,17 @@ export class AptosScriptComposer {
 
   // Initializing the wasm needed for the script composer, must be called
   // before using the composer.
-  async init( transactionComposer: new () => TransactionComposer, initSync:(module: {
-    module: SyncInitInput;
-} | SyncInitInput) => InitOutput ) {
+  async init(
+    transactionComposer: new () => TransactionComposer,
+    initSync: (
+      module:
+        | {
+            module: SyncInitInput;
+          }
+        | SyncInitInput,
+    ) => InitOutput,
+  ) {
     if (!AptosScriptComposer.transactionComposer) {
-
       if (!ScriptComposerWasm.isInitialized) {
         ScriptComposerWasm.init();
       }

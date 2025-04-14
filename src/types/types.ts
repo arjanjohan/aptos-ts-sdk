@@ -280,11 +280,15 @@ export type ClientConfig = ClientHeadersType & {
 };
 
 export type scriptComposerConfig = {
-  initSync?: (module: {
-    module: SyncInitInput;
-  } | SyncInitInput) => InitOutput ;
+  initSync?: (
+    module:
+      | {
+          module: SyncInitInput;
+        }
+      | SyncInitInput,
+  ) => InitOutput;
   transactionComposer?: new () => TransactionComposer;
-}
+};
 
 /**
  * A configuration object for a Fullnode, allowing for the inclusion of extra headers in requests.
