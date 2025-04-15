@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { InitOutput, SyncInitInput, TransactionComposer } from "@aptos-labs/script-composer-pack";
+import { InitOutput, SyncInitInput, TransactionComposer } from "@aptos-labs/aptos-dynamic-transaction-composer";
 import { Network } from "../utils/apiEndpoints";
 import { OrderBy, TokenStandard } from "./indexer";
 
@@ -288,6 +288,7 @@ export type scriptComposerConfig = {
       | SyncInitInput,
   ) => InitOutput;
   transactionComposer?: new () => TransactionComposer;
+  wasm?: WebAssembly.Module;
 };
 
 /**

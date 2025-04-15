@@ -1,7 +1,7 @@
 // Copyright © Aptos Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-import { InitOutput, ScriptComposerWasm, SyncInitInput, TransactionComposer } from "@aptos-labs/script-composer-pack";
+import { InitOutput, SyncInitInput, TransactionComposer } from "@aptos-labs/aptos-dynamic-transaction-composer";
 import { AptosApiType, getFunctionParts } from "../../utils";
 import { AptosConfig } from "../../api/aptosConfig";
 import { InputBatchedFunctionData } from "../types";
@@ -39,11 +39,12 @@ export class AptosScriptComposer {
         | SyncInitInput,
     ) => InitOutput,
   ) {
+    if (!this.config.scriptComposerConfig?.wasm) {
+      throw new Error("Script composer wasm not found");
+    }
+
     if (!AptosScriptComposer.transactionComposer) {
-      if (!ScriptComposerWasm.isInitialized) {
-        ScriptComposerWasm.init();
-      }
-      initSync({ module: ScriptComposerWasm.wasm });
+      initSync(this.config.scriptComposerConfig.wasm);
       AptosScriptComposer.transactionComposer = transactionComposer;
     }
     this.builder = AptosScriptComposer.transactionComposer.single_signer();

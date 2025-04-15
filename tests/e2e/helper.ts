@@ -1,5 +1,5 @@
 import { Aptos, AptosConfig, Network, NetworkToNetworkName } from "../../src";
-import { initSync, TransactionComposer } from "@aptos-labs/script-composer-pack";
+import { initSync, TransactionComposer } from "@aptos-labs/aptos-dynamic-transaction-composer";
 
 /**
  * Use this function whenever you want an Aptos client.
